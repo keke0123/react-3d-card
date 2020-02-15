@@ -62,12 +62,20 @@ class Card3D extends React.Component {
                 ]
             };
         });
-        setTimeout(() => {
-            if (this.state.cardList[0].name != this.clickedCard.name) {
-                this.rotateCard();
-            }
-        }, 0);
+        // setTimeout(() => {
+        if (this.state.cardList[0].name != this.clickedCard.name) {
+            this.rotateCard();
+        }
+        // }, 0);
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // if (this.state.cardList != prevState.cardList) {
+        //     if (this.state.cardList[0].name != this.clickedCard.name) {
+        //         this.rotateCard();
+        //     }
+        // }
+    }
 
     render() {
         return (
@@ -76,7 +84,8 @@ class Card3D extends React.Component {
                     console.log("index", index);
                     return (
                         <div
-                            key={index}
+                            key={item.name}
+                            // key={index}
                             className={`card-box index-${index + 1} ${
                                 this.state.clicked ? "clicked" : ""
                             } ${index == 0 && this.state.rotate ? "rotate" : ""}
