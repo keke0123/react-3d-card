@@ -1,5 +1,55 @@
+@keyframes rotate {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 .Container-Card3D {
+    position: relative;
     width: 50%;
     height: 100%;
     border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // translateZ 적용시키려면 부모태그에 적용시켜야 된다.
+    -webkit-perspective: 500;
+
+    .card-box {
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        border: 1px solid cornflowerblue;
+        background-color: darkcyan;
+        transition: transform 0.3s;
+
+        /* 연산자 사용 / start */
+        $total: 5;
+        @for $i from 1 to $total {
+            &.index-#{$i} {
+                z-index: $total - $i;
+                transform: translateY(30 * ($total - $i) + px)
+                    translateZ(20 * ($total - $i) + px);
+                &.clicked {
+                    transform: translateY(60 * ($total - $i) + px)
+                        translateZ(20 * ($total - $i) + px);
+                }
+            }
+        }
+        &.rotate {
+            opacity: 0;
+            animation: rotate 0.3s;
+        }
+        // &.clicked {
+        //     pointer-events: none;
+        // }
+        // &[class*="index"] {
+        //     background-color: #fff !important;
+        //     // width: 500px !important;
+        // }
+        /* 연산자 사용 / end */
+    }
 }
